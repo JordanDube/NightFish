@@ -10,15 +10,23 @@ public class GameManager : MonoBehaviour
     private CameraFaller cameraFaller;
 
     private Bobber bobber;
+    private UIHandler uiHandler;
+    [SerializeField] bool[] fishTracker;
+    [SerializeField] GameObject[] fish;
+    [SerializeField] GameObject demonFish;
+    bool hasDemonFish = false;
+    float highScore;
+    bool hasFish = false;
+    int level = 0;
 
     private void Awake()
     {
         //Find Save file
         cameraFaller = FindObjectOfType<CameraFaller>().GetComponent<CameraFaller>();
         bobber = FindObjectOfType<Bobber>().GetComponent<Bobber>();
+        uiHandler = FindObjectOfType<UIHandler>().GetComponent<UIHandler>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.Space) && !gameStarted)
@@ -26,15 +34,48 @@ public class GameManager : MonoBehaviour
             StartGame();
         }
     }
-
     private void StartGame()
     {
         cameraFaller.StartFalling();
         bobber.StartFalling();
+        LoadFish();
+        gameStarted = true;
     }
-    
+
+    void LoadFish()
+    {
+        for(int i = 0; i < fishTracker.Length; i++)
+        {
+            fish[i].SetActive(fishTracker[i]);
+            if(fishTracker[i])
+            {
+                hasFish = true;
+            }
+        }
+        if(!hasFish)
+        {
+            demonFish.SetActive(true);
+        }
+    }
     public void ResetGameFail()
     {
-        
+        uiHandler.FailedCatch();
     }
+
+    public void CaughtFish(int fishNumber, float fishLength, string fishName)
+    {
+        if(fishLength > highScore)
+        {
+            highScore = fishLength;
+            uiHandler.CaughtFish(fishName, fishLength, true, fishNumber);
+        }
+        else
+        {
+            uiHandler.CaughtFish(fishName, fishLength, false, fishNumber);
+        }
+        fishTracker[fishNumber] = false;
+        gameStarted = false;
+    }
+
+
 }
