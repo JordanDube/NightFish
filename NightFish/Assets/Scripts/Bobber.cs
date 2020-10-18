@@ -9,9 +9,12 @@ public class Bobber : MonoBehaviour
     private bool canMove = false;
     private bool reset = false;
     private Rigidbody2D rb;
+    private CircleCollider2D myCollider;
     private GameManager gameManager;
     private CameraFaller cameraFaller;
+    UIHandler uiHandler;
     private bool hasChild = false;
+    bool badCatch = false;
     
     [SerializeField] private float movementSpeed = 1.25f;
     [SerializeField] Transform startingLocation;
@@ -19,8 +22,10 @@ public class Bobber : MonoBehaviour
     private void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        myCollider = gameObject.GetComponent<CircleCollider2D>();
         gameManager = FindObjectOfType<GameManager>().GetComponent<GameManager>();
         cameraFaller = FindObjectOfType<CameraFaller>().GetComponent<CameraFaller>();
+        uiHandler = FindObjectOfType<UIHandler>().GetComponent<UIHandler>();
         StopFalling();
     }
 
@@ -58,18 +63,27 @@ public class Bobber : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        print("Entered " + other.gameObject.tag);
         switch (other.gameObject.tag)
         {
             case "StartMoving": StartMove();
                 break;
-            case "ExitScreen": gameManager.ResetGameFail();
+            case "ExitScreen": gameManager.ResetGameFail(); FailedCatch();
                 break;
-            case "Fish": SetChild(other.gameObject);
+            case "Fish": if(!hasChild)SetChild(other.gameObject);
                 break;
         }
     }
 
+    void FailedCatch()
+    {
+        reset = true;
+        canMove = false;
+        StopFalling();
+        badCatch = true;
+        ResetPosition();
+        cameraFaller.ResetPos();
+        myCollider.enabled = false;
+    }
     void SetChild(GameObject other)
     {
         other.transform.SetParent(this.gameObject.transform);
@@ -81,6 +95,8 @@ public class Bobber : MonoBehaviour
         Fish fish = other.gameObject.GetComponent<Fish>();
         gameManager.CaughtFish(fish.fishNum, fish.fishLength, fish.fishName);
         cameraFaller.ResetPos();
+        badCatch = false;
+        myCollider.enabled = false;
     }
     
     void ResetPosition()
@@ -91,7 +107,19 @@ public class Bobber : MonoBehaviour
             reset = false;
             canMove = true;
             transform.position = startingLocation.position;
-            Destroy(gameObject.GetComponentInChildren<GameObject>());
+            if (hasChild)
+                //gameObject.GetComponentInChildren<GameObject>().SetActive(false);
+                GameObject.Find(gameObject.GetComponentInChildren<Fish>().name).SetActive(false);
+            if(badCatch)
+            {
+                uiHandler.FailedCatch();
+            }
+            else
+            {
+                uiHandler.ShowCaughtPanel();
+            }
+            hasChild = false;
+            myCollider.enabled = true;
         }
     }
 }

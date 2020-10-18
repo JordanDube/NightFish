@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     {
         cameraFaller.StartFalling();
         bobber.StartFalling();
+        uiHandler.StartGame();
         LoadFish();
         gameStarted = true;
     }
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour
     }
     public void ResetGameFail()
     {
-        uiHandler.FailedCatch();
+        //uiHandler.FailedCatch();
     }
 
     public void CaughtFish(int fishNumber, float fishLength, string fishName)
@@ -67,11 +68,11 @@ public class GameManager : MonoBehaviour
         if(fishLength > highScore)
         {
             highScore = fishLength;
-            uiHandler.CaughtFish(fishName, fishLength, true, fishNumber);
+            uiHandler.CaughtFish(fishName, fishLength, true, fishNumber, (int)highScore);
         }
         else
         {
-            uiHandler.CaughtFish(fishName, fishLength, false, fishNumber);
+            uiHandler.CaughtFish(fishName, fishLength, false, fishNumber, (int)highScore);
         }
         fishTracker[fishNumber] = false;
         gameStarted = false;

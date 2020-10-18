@@ -30,7 +30,7 @@ public class CameraFaller : MonoBehaviour
 
         if(canReset)
         {
-
+            ResetPosition();
         }
     }
 

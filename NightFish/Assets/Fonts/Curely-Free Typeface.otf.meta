@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: aeb583ee0dbcecd439f821b938971ace
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Curely
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e12849a14544b1f479a43159008d227a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
