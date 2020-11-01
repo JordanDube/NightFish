@@ -21,6 +21,8 @@ public class UIHandler : MonoBehaviour
     {
         fishName.text = "";
         length.text = "";
+        highscoreText.text = "";
+
         newText.SetActive(false);
         fishCaughtImage.sprite = null;
         gameOverPanel.SetActive(false);
