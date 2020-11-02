@@ -54,7 +54,7 @@ public class Bobber : MonoBehaviour
     }
     public void StartFalling()
     {
-        rb.gravityScale = 1f;
+        rb.gravityScale =  1f;
     }
     public void StopFalling()
     {
@@ -83,6 +83,7 @@ public class Bobber : MonoBehaviour
         ResetPosition();
         cameraFaller.ResetPos();
         myCollider.enabled = false;
+        gameManager.ResetGameFail();
     }
     void SetChild(GameObject other)
     {
@@ -105,7 +106,6 @@ public class Bobber : MonoBehaviour
         if(Vector2.Distance(transform.position, startingLocation.position) < .2f)
         {
             reset = false;
-            canMove = true;
             transform.position = startingLocation.position;
             if (hasChild)
                 //gameObject.GetComponentInChildren<GameObject>().SetActive(false);
@@ -120,6 +120,7 @@ public class Bobber : MonoBehaviour
             }
             hasChild = false;
             myCollider.enabled = true;
+            canMove = false;
         }
     }
 }

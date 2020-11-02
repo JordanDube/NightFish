@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     public void ResetGameFail()
     {
         //uiHandler.FailedCatch();
+        gameStarted = false;
     }
 
     public void CaughtFish(int fishNumber, float fishLength, string fishName)

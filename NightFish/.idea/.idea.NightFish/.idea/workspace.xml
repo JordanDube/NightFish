@@ -37,10 +37,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Bobber.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CameraFaller.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FishRoam.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Bobber.cs" />
       </list>
     </option>
   </component>
@@ -85,6 +85,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602867519968</updated>
       <workItem from="1602867526852" duration="4742000" />
+      <workItem from="1604262654202" duration="2051000" />
     </task>
     <servers />
   </component>
@@ -103,6 +104,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
