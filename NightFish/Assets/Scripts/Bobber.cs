@@ -102,6 +102,7 @@ public class Bobber : MonoBehaviour
     
     void ResetPosition()
     {
+        canMove = false;
         gameObject.transform.position = Vector2.MoveTowards(transform.position, startingLocation.position, resetSpeed * Time.deltaTime);
         if(Vector2.Distance(transform.position, startingLocation.position) < .2f)
         {
@@ -120,7 +121,7 @@ public class Bobber : MonoBehaviour
             }
             hasChild = false;
             myCollider.enabled = true;
-            canMove = false;
+            //canMove = false;
         }
     }
 }
