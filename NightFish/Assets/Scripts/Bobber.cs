@@ -55,6 +55,7 @@ public class Bobber : MonoBehaviour
     public void StartFalling()
     {
         rb.gravityScale =  1f;
+        myCollider.enabled = true;
     }
     public void StopFalling()
     {
