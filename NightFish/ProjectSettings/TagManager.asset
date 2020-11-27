@@ -7,6 +7,7 @@ TagManager:
   - StartMoving
   - ExitScreen
   - Fish
+  - CutSceneEnd
   layers:
   - Default
   - TransparentFX

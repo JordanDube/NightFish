@@ -9,6 +9,7 @@ public class CameraFaller : MonoBehaviour
     [SerializeField] private float bottomStopY = -30f;
     [SerializeField] Transform startingLocation;
     [SerializeField] float resetSpeed = 5f;
+    [SerializeField] float gravityScale = 1f;
 
     bool canReset = false;
 
@@ -23,9 +24,19 @@ public class CameraFaller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y <= bottomStopY)
+        if(gravityScale == -1)
         {
-            StopFalling();
+            if (transform.position.y >= bottomStopY)
+            {
+                StopFalling();
+            }
+        }
+        else if(gravityScale == 1)
+        {
+            if (transform.position.y <= bottomStopY)
+            {
+                StopFalling();
+            }
         }
 
         if(canReset)
@@ -36,7 +47,7 @@ public class CameraFaller : MonoBehaviour
 
     public void StartFalling()
     {
-        rb.gravityScale = 1f;
+        rb.gravityScale = gravityScale;
     }
 
     public void StopFalling()

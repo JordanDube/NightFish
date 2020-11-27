@@ -15,6 +15,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] GameObject newText;
     [SerializeField] Sprite[] fishImages;
     [SerializeField] Image fishCaughtImage;
+    [SerializeField] GameObject angryDemon;
+    [SerializeField] GameObject thanksForPlayingPanel;
 
     bool isDemonFish = false;
     public void StartGame()
@@ -58,5 +60,15 @@ public class UIHandler : MonoBehaviour
     public void FailedCatch()
     {
         failedPanel.SetActive(true);
+    }
+
+    public void DemonAwakes()
+    {
+        angryDemon.SetActive(true);
+    }
+
+    public void GameDone()
+    {
+        thanksForPlayingPanel.SetActive(true);
     }
 }

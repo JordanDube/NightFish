@@ -19,14 +19,40 @@ public class GameManager : MonoBehaviour
     bool hasFish = false;
     int level = 0;
 
+    [SerializeField] bool isDemonLevel = false;
+    [SerializeField] GameObject blackPanel;
+    [SerializeField] float dramaticPause = 3f;
+    [SerializeField] GameObject instructions;
     private void Awake()
     {
         //Find Save file
         cameraFaller = FindObjectOfType<CameraFaller>().GetComponent<CameraFaller>();
         bobber = FindObjectOfType<Bobber>().GetComponent<Bobber>();
         uiHandler = FindObjectOfType<UIHandler>().GetComponent<UIHandler>();
+        if(isDemonLevel)
+        {
+            //Pause Audio
+            gameStarted = true;
+            StartCoroutine(DemonLevelStart());
+        }
+        else
+        {
+            StartCoroutine(InstructionsHint());
+        }
     }
 
+    IEnumerator InstructionsHint()
+    {
+        yield return new WaitForSeconds(8f);
+        instructions.SetActive(true);
+    }
+    IEnumerator DemonLevelStart()
+    {
+        yield return new WaitForSeconds(dramaticPause);
+        //play audio
+        blackPanel.SetActive(false);
+        gameStarted = false;
+    }
     void Update()
     {
         if (Input.GetKey(KeyCode.Space) && !gameStarted)
